@@ -1,21 +1,33 @@
 <!DOCTYPE html>
-<html>
+<html lang="id">
 <head>
-  <title>PnL Calendar</title>
-  <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <title>Trade Recap</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
 
-  <div class="panel">
-    <button id="prev">◀</button>
-    <h2 id="title"></h2>
-    <button id="next">▶</button>
-  </div>
+<h1> Calendar PnL</h1>
 
-  <div id="summary"></div>
-  <div id="calendar" class="calendar"></div>
-  <div id="detail" class="detail"></div>
+<form id="tradeForm" class="form">
+  <input type="date" id="date" required />
+  <input type="text" id="pair" placeholder="Pair (XAUUSD)" required />
+  <input type="number" id="lot" step="0.01" placeholder="Lot" required />
+  <input type="number" id="pnl" step="0.01" placeholder="PnL" required />
+  <input type="text" id="note" placeholder="Catatan (opsional)" />
+  <button type="submit">Save Trade</button>
+</form>
 
-  <script type="module" src="app.js"></script>
+<div class="nav">
+  <button id="prev">◀</button>
+  <h2 id="title"></h2>
+  <button id="next">▶</button>
+</div>
+
+<div id="summary"></div>
+<div id="calendar" class="calendar"></div>
+<div id="detail"></div>
+
+<script type="module" src="app.js"></script>
 </body>
 </html>
