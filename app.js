@@ -64,7 +64,7 @@ function renderCalendar(y,m,daily,docs){
 
     const div = document.createElement("div");
     div.className = `day ${cls}`;
-    div.innerHTML = `<b>${d}</b><br>${pnl>0?"$":""}${pnl}`;
+    div.innerHTML = `<b>${d}</b><br>${pnl>0?"$":""}${pnl<0?"$":""}`;
 
     div.onclick = ()=>{
       selectedDate = date;
