@@ -2,21 +2,12 @@
 <html lang="id">
 <head>
   <meta charset="UTF-8" />
-  <title>Trade Recap</title>
+  <title>Calendar PnL</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
 
-<h1> Calendar PnL</h1>
-
-<form id="tradeForm" class="form">
-  <input type="date" id="date" required />
-  <input type="text" id="pair" placeholder="Pair (XAUUSD)" required />
-  <input type="number" id="lot" step="0.01" placeholder="Lot" required />
-  <input type="number" id="pnl" step="0.01" placeholder="PnL" required />
-  <input type="text" id="note" placeholder="Catatan (opsional)" />
-  <button type="submit">Save Trade</button>
-</form>
+<h1>📅 Calendar PnL</h1>
 
 <div class="nav">
   <button id="prev">◀</button>
@@ -26,7 +17,18 @@
 
 <div id="summary"></div>
 <div id="calendar" class="calendar"></div>
-<div id="detail"></div>
+
+<!-- Popup Input -->
+<div id="modal" class="modal hidden">
+  <div class="modal-box">
+    <h3 id="modalDate"></h3>
+    <input type="number" id="modalPnl" placeholder="Masukkan PnL" />
+    <div class="modal-actions">
+      <button id="savePnl">Save</button>
+      <button id="closeModal">Cancel</button>
+    </div>
+  </div>
+</div>
 
 <script type="module" src="app.js"></script>
 </body>
