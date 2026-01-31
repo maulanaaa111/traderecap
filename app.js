@@ -57,5 +57,13 @@ function renderCalendar(y,m,daily){
   }
 }
 
-document.getElementById("prev").onclick = ()=>{ current.setMonth(current.getMonth()-1); location.reload(); }
-document.getElementById("next").onclick = ()=>{ current.setMonth(current.getMonth()+1); location.reload(); }
+document.getElementById("prev").onclick = ()=>{
+  current.setMonth(current.getMonth()-1);
+  loadCalendar(auth.currentUser);
+};
+
+document.getElementById("next").onclick = ()=>{
+  current.setMonth(current.getMonth()+1);
+  loadCalendar(auth.currentUser);
+};
+
