@@ -1,21 +1,22 @@
 import { auth, db } from './firebase.js';
-import { onAuthStateChanged, signOut } 
+import { onAuthStateChanged } 
   from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
-import { collection, getDocs } 
+import { collection, getDocs, addDoc } 
   from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
 const title = document.getElementById("title");
 const calendar = document.getElementById("calendar");
 const summary = document.getElementById("summary");
-const detail = document.getElementById("detail");
 
 let current = new Date();
 
+// Auth check
 onAuthStateChanged(auth, async user => {
   if (!user) return location.href = "index.html";
   loadCalendar(user);
 });
 
+// Load calendar
 async function loadCalendar(user){
   const y = current.getFullYear();
   const m = current.getMonth();
@@ -35,6 +36,7 @@ async function loadCalendar(user){
   renderCalendar(y,m,daily);
 }
 
+// Render calendar
 function renderCalendar(y,m,daily){
   calendar.innerHTML = "";
   const firstDay = new Date(y,m,1).getDay();
@@ -57,6 +59,7 @@ function renderCalendar(y,m,daily){
   }
 }
 
+// Prev / Next
 document.getElementById("prev").onclick = ()=>{
   current.setMonth(current.getMonth()-1);
   loadCalendar(auth.currentUser);
@@ -67,3 +70,23 @@ document.getElementById("next").onclick = ()=>{
   loadCalendar(auth.currentUser);
 };
 
+// Save trade
+const form = document.getElementById("tradeForm");
+form.addEventListener("submit", async (e)=>{
+  e.preventDefault();
+  const user = auth.currentUser;
+  if(!user) return alert("Belum login!");
+
+  const data = {
+    date: document.getElementById("date").value,
+    pair: document.getElementById("pair").value,
+    lot: Number(document.getElementById("lot").value),
+    pnl: Number(document.getElementById("pnl").value),
+    note: document.getElementById("note").value || "",
+    createdAt: new Date()
+  };
+
+  await addDoc(collection(db,"users",user.uid,"pnl"), data);
+  form.reset();
+  loadCalendar(user);
+});
