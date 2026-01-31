@@ -179,3 +179,56 @@ h1 {
 #closeModal:hover {
   filter: brightness(1.1);
 }
+
+/* ===== RESPONSIVE (HP) ===== */
+@media (max-width: 768px) {
+  body {
+    padding: 14px;
+  }
+
+  h1 {
+    font-size: 18px;
+  }
+
+  .nav h2 {
+    font-size: 14px;
+  }
+
+  .calendar {
+    gap: 6px;
+  }
+
+  .day {
+    min-height: 54px;
+    padding: 6px;
+    font-size: 11px;
+    border-radius: 10px;
+  }
+
+  .day b {
+    font-size: 12px;
+    margin-bottom: 2px;
+  }
+
+  #summary {
+    font-size: 12px;
+  }
+
+  .modal-box {
+    width: 90%;
+  }
+
+  .modal-box h3 {
+    font-size: 13px;
+  }
+
+  .modal-box input {
+    font-size: 13px;
+    padding: 10px;
+  }
+
+  .modal-actions button {
+    padding: 9px;
+    font-size: 13px;
+  }
+}
