@@ -1,7 +1,7 @@
 import { auth, db } from './firebase.js';
 import { onAuthStateChanged } 
   from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
-import { collection, getDocs, addDoc, query, where } 
+import { collection, getDocs, addDoc } 
   from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
 const title = document.getElementById("title");
@@ -23,6 +23,7 @@ onAuthStateChanged(auth, async user => {
   loadCalendar(user);
 });
 
+// Load calendar
 async function loadCalendar(user){
   const y = current.getFullYear();
   const m = current.getMonth();
@@ -42,6 +43,7 @@ async function loadCalendar(user){
   renderCalendar(y,m,daily);
 }
 
+// Render calendar
 function renderCalendar(y,m,daily){
   calendar.innerHTML = "";
   const firstDay = new Date(y,m,1).getDay();
@@ -75,7 +77,7 @@ document.getElementById("next").onclick = ()=>{
   loadCalendar(auth.currentUser);
 };
 
-// Modal
+// Modal logic
 function openModal(date){
   selectedDate = date;
   modalDate.innerText = "Input PnL: " + date;
