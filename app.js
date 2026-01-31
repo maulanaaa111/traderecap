@@ -53,7 +53,7 @@ function renderCalendar(y,m,daily,docs){
   const days = new Date(y,m+1,0).getDate();
 
   let total = Object.values(daily).reduce((a,b)=>a+b,0);
-  summary.innerText = `Total PnL Bulan Ini: ${total>0?"+":""}${total}`;
+  summary.innerText = `Total PnL Bulan Ini: ${total>0?"$":""}${total}`;
 
   for(let i=0;i<firstDay;i++) calendar.innerHTML += `<div></div>`;
 
