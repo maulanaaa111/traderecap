@@ -1,65 +1,15 @@
-/* ===== RESET & BASE ===== */
-* {
-  box-sizing: border-box;
-}
+* { box-sizing: border-box; }
 
 body {
   margin: 0;
   padding: 20px;
-  font-family: 'Inter', system-ui, sans-serif;
+  font-family: Inter, system-ui, sans-serif;
   background: #0f172a;
   color: #e5e7eb;
 }
 
-h1 {
-  text-align: center;
-  margin-bottom: 20px;
-}
+h1 { text-align: center; }
 
-/* ===== FORM ===== */
-.form {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
-  gap: 10px;
-  background: #020617;
-  padding: 15px;
-  border-radius: 12px;
-  margin-bottom: 20px;
-  box-shadow: 0 0 15px rgba(0,0,0,.4);
-}
-
-.form input,
-.form button {
-  padding: 10px;
-  border-radius: 8px;
-  border: none;
-  outline: none;
-  font-size: 14px;
-}
-
-.form input {
-  background: #020617;
-  border: 1px solid #1e293b;
-  color: #e5e7eb;
-}
-
-.form input::placeholder {
-  color: #64748b;
-}
-
-.form button {
-  background: #22c55e;
-  color: #022c22;
-  font-weight: 600;
-  cursor: pointer;
-  transition: 0.2s;
-}
-
-.form button:hover {
-  background: #16a34a;
-}
-
-/* ===== NAV ===== */
 .nav {
   display: flex;
   justify-content: space-between;
@@ -76,13 +26,11 @@ h1 {
   cursor: pointer;
 }
 
-/* ===== SUMMARY ===== */
 #summary {
   margin-bottom: 10px;
   font-weight: 600;
 }
 
-/* ===== CALENDAR ===== */
 .calendar {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
@@ -95,24 +43,56 @@ h1 {
   padding: 8px;
   border-radius: 8px;
   min-height: 60px;
-  font-size: 13px;
+  cursor: pointer;
 }
 
-.day b {
-  display: block;
-  font-size: 14px;
-  margin-bottom: 4px;
-}
+.day:hover { background:#020617aa; }
 
 .day.green { color: #22c55e; }
 .day.red   { color: #ef4444; }
 .day.gray  { color: #94a3b8; }
 
-/* ===== DETAIL (for next feature) ===== */
-#detail {
-  margin-top: 15px;
+/* Modal */
+.modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hidden { display: none; }
+
+.modal-box {
   background: #020617;
   border: 1px solid #1e293b;
-  border-radius: 10px;
-  padding: 10px;
+  padding: 20px;
+  border-radius: 12px;
+  width: 280px;
 }
+
+.modal-box input {
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  background: #020617;
+  border: 1px solid #1e293b;
+  border-radius: 8px;
+  color: #e5e7eb;
+}
+
+.modal-actions {
+  display: flex;
+  justify-content: space-between;
+}
+
+.modal-actions button {
+  padding: 8px 12px;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+}
+
+#savePnl { background:#22c55e; color:#022c22; }
+#closeModal { background:#334155; color:#e5e7eb; }
