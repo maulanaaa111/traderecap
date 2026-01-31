@@ -1,105 +1,104 @@
-import { auth, db } from './firebase.js';
-import { onAuthStateChanged } 
-  from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
-import { collection, getDocs, addDoc } 
-  from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
-
-const title = document.getElementById("title");
-const calendar = document.getElementById("calendar");
-const summary = document.getElementById("summary");
+const calendarEl = document.getElementById("calendar");
+const titleEl = document.getElementById("title");
+const summaryEl = document.getElementById("summary");
 
 const modal = document.getElementById("modal");
 const modalDate = document.getElementById("modalDate");
 const modalPnl = document.getElementById("modalPnl");
-const savePnl = document.getElementById("savePnl");
-const closeModal = document.getElementById("closeModal");
+const saveBtn = document.getElementById("savePnl");
+const closeBtn = document.getElementById("closeModal");
+
+const prevBtn = document.getElementById("prev");
+const nextBtn = document.getElementById("next");
 
 let current = new Date();
 let selectedDate = "";
 
-// Auth check
-onAuthStateChanged(auth, async user => {
-  if (!user) return location.href = "index.html";
-  loadCalendar(user);
-});
+let data = JSON.parse(localStorage.getItem("pnlCalendar")) || {};
 
-// Load calendar
-async function loadCalendar(user){
-  const y = current.getFullYear();
-  const m = current.getMonth();
-
-  title.innerText = current.toLocaleString("id-ID",{month:"long",year:"numeric"});
-
-  const snap = await getDocs(collection(db,"users",user.uid,"pnl"));
-  let daily = {};
-
-  snap.forEach(doc=>{
-    const d = doc.data();
-    if(d.date.startsWith(`${y}-${String(m+1).padStart(2,'0')}`)){
-      daily[d.date] = (daily[d.date]||0) + d.pnl;
-    }
-  });
-
-  renderCalendar(y,m,daily);
+function saveData() {
+  localStorage.setItem("pnlCalendar", JSON.stringify(data));
 }
 
-// Render calendar
-function renderCalendar(y,m,daily){
-  calendar.innerHTML = "";
-  const firstDay = new Date(y,m,1).getDay();
-  const days = new Date(y,m+1,0).getDate();
+function renderCalendar() {
+  calendarEl.innerHTML = "";
+  const year = current.getFullYear();
+  const month = current.getMonth();
 
-  let total = Object.values(daily).reduce((a,b)=>a+b,0);
-  summary.innerText = `Total PnL Bulan Ini: ${total>0?"+":""}${total}`;
+  titleEl.textContent = current.toLocaleString("id-ID", {
+    month: "long",
+    year: "numeric"
+  });
 
-  for(let i=0;i<firstDay;i++) calendar.innerHTML += `<div></div>`;
+  const firstDay = new Date(year, month, 1).getDay();
+  const daysInMonth = new Date(year, month + 1, 0).getDate();
 
-  for(let d=1;d<=days;d++){
-    const date = `${y}-${String(m+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
-    const pnl = daily[date]||0;
-    const cls = pnl>0?"green":pnl<0?"red":"gray";
+  let total = 0;
+  let win = 0;
+  let loss = 0;
+
+  // Offset kosong
+  for (let i = 0; i < firstDay; i++) {
+    const div = document.createElement("div");
+    calendarEl.appendChild(div);
+  }
+
+  for (let day = 1; day <= daysInMonth; day++) {
+    const dateKey = `${year}-${month + 1}-${day}`;
+    const pnl = data[dateKey] || 0;
 
     const div = document.createElement("div");
-    div.className = `day ${cls}`;
-    div.innerHTML = `<b>${d}</b><br>${pnl>0?"+":""}${pnl}`;
-    div.onclick = ()=> openModal(date);
-    calendar.appendChild(div);
+    div.className = "day";
+
+    if (pnl > 0) {
+      div.classList.add("green");
+      win++;
+    } else if (pnl < 0) {
+      div.classList.add("red");
+      loss++;
+    } else {
+      div.classList.add("gray");
+    }
+
+    total += pnl;
+
+    div.innerHTML = `<b>${day}</b>${pnl !== 0 ? pnl : ""}`;
+
+    div.onclick = () => {
+      selectedDate = dateKey;
+      modalDate.textContent = `📅 ${day} ${titleEl.textContent}`;
+      modalPnl.value = pnl || "";
+      modal.classList.remove("hidden");
+    };
+
+    calendarEl.appendChild(div);
   }
+
+  summaryEl.textContent = `Total: ${total} | Win: ${win} | Loss: ${loss}`;
 }
 
-// Prev / Next
-document.getElementById("prev").onclick = ()=>{
-  current.setMonth(current.getMonth()-1);
-  loadCalendar(auth.currentUser);
-};
-document.getElementById("next").onclick = ()=>{
-  current.setMonth(current.getMonth()+1);
-  loadCalendar(auth.currentUser);
-};
-
-// Modal logic
-function openModal(date){
-  selectedDate = date;
-  modalDate.innerText = "Input PnL: " + date;
-  modalPnl.value = "";
-  modal.classList.remove("hidden");
-}
-
-closeModal.onclick = ()=> modal.classList.add("hidden");
-
-savePnl.onclick = async ()=>{
-  const user = auth.currentUser;
-  if(!user) return alert("Belum login");
-
-  const pnl = Number(modalPnl.value);
-  if(isNaN(pnl)) return alert("Isi PnL dulu bro 😅");
-
-  await addDoc(collection(db,"users",user.uid,"pnl"), {
-    date: selectedDate,
-    pnl,
-    createdAt: new Date()
-  });
-
+saveBtn.onclick = () => {
+  const val = Number(modalPnl.value);
+  if (!isNaN(val)) {
+    data[selectedDate] = val;
+    saveData();
+    renderCalendar();
+  }
   modal.classList.add("hidden");
-  loadCalendar(user);
 };
+
+closeBtn.onclick = () => {
+  modal.classList.add("hidden");
+};
+
+prevBtn.onclick = () => {
+  current.setMonth(current.getMonth() - 1);
+  renderCalendar();
+};
+
+nextBtn.onclick = () => {
+  current.setMonth(current.getMonth() + 1);
+  renderCalendar();
+};
+
+renderCalendar();
