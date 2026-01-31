@@ -1,20 +1,21 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>PnL Journal</title>
+  <title>PnL Calendar</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <h2>PnL Journal</h2>
 
-  <input type="date" id="dateInput">
-  <input type="number" id="pnlInput" placeholder="PnL hari ini">
-  <button id="saveBtn">Save PnL</button>
-  <button id="logoutBtn">Logout</button>
+  <div class="panel">
+    <button id="prev">◀</button>
+    <h2 id="title"></h2>
+    <button id="next">▶</button>
+  </div>
 
-  <ul id="pnlList"></ul>
+  <div id="summary"></div>
+  <div id="calendar" class="calendar"></div>
+  <div id="detail" class="detail"></div>
 
   <script type="module" src="app.js"></script>
 </body>
 </html>
-
