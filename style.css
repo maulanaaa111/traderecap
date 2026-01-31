@@ -1,4 +1,6 @@
-* { box-sizing: border-box; }
+* {
+  box-sizing: border-box;
+}
 
 body {
   margin: 0;
@@ -8,8 +10,12 @@ body {
   color: #e5e7eb;
 }
 
-h1 { text-align: center; }
+h1 {
+  text-align: center;
+  margin-bottom: 20px;
+}
 
+/* ===== NAV ===== */
 .nav {
   display: flex;
   justify-content: space-between;
@@ -26,11 +32,13 @@ h1 { text-align: center; }
   cursor: pointer;
 }
 
+/* ===== SUMMARY ===== */
 #summary {
   margin-bottom: 10px;
   font-weight: 600;
 }
 
+/* ===== CALENDAR ===== */
 .calendar {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
@@ -43,16 +51,25 @@ h1 { text-align: center; }
   padding: 8px;
   border-radius: 8px;
   min-height: 60px;
+  font-size: 13px;
   cursor: pointer;
 }
 
-.day:hover { background:#020617aa; }
+.day b {
+  display: block;
+  font-size: 14px;
+  margin-bottom: 4px;
+}
 
 .day.green { color: #22c55e; }
 .day.red   { color: #ef4444; }
 .day.gray  { color: #94a3b8; }
 
-/* Modal */
+.day:hover {
+  background: #020617cc;
+}
+
+/* ===== MODAL (INPUT PNL) ===== */
 .modal {
   position: fixed;
   inset: 0;
@@ -60,9 +77,12 @@ h1 { text-align: center; }
   display: flex;
   align-items: center;
   justify-content: center;
+  z-index: 999;
 }
 
-.hidden { display: none; }
+.hidden {
+  display: none;
+}
 
 .modal-box {
   background: #020617;
@@ -70,6 +90,10 @@ h1 { text-align: center; }
   padding: 20px;
   border-radius: 12px;
   width: 280px;
+}
+
+.modal-box h3 {
+  margin: 0 0 10px;
 }
 
 .modal-box input {
@@ -85,14 +109,23 @@ h1 { text-align: center; }
 .modal-actions {
   display: flex;
   justify-content: space-between;
+  gap: 10px;
 }
 
 .modal-actions button {
+  flex: 1;
   padding: 8px 12px;
   border-radius: 6px;
   border: none;
   cursor: pointer;
 }
 
-#savePnl { background:#22c55e; color:#022c22; }
-#closeModal { background:#334155; color:#e5e7eb; }
+#savePnl {
+  background: #22c55e;
+  color: #022c22;
+}
+
+#closeModal {
+  background: #334155;
+  color: #e5e7eb;
+}
