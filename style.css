@@ -1,23 +1,9 @@
-body {
-  font-family: Arial;
-  background:#0f172a;
-  color:white;
-  text-align:center;
-}
-
-input, button {
-  padding:10px;
-  margin:5px;
-  border-radius:6px;
-  border:none;
-}
-
-button {
-  background:#22c55e;
-  font-weight:bold;
-}
-
-li {
-  list-style:none;
-}
-
+body { background:#0f172a; color:#e5e7eb; font-family:Inter,system-ui; text-align:center; }
+.panel { display:flex; justify-content:center; align-items:center; gap:12px; }
+.calendar { display:grid; grid-template-columns:repeat(7,1fr); gap:8px; margin:16px auto; max-width:600px; }
+.day { padding:10px; border-radius:10px; min-height:70px; cursor:pointer; }
+.green { background:#16a34a; }
+.red { background:#dc2626; }
+.gray { background:#334155; }
+.detail { margin:16px auto; padding:12px; background:#020617; border-radius:12px; max-width:600px; }
+#summary { margin-top:10px; font-weight:bold; }
