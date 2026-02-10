@@ -1,118 +1,87 @@
-/* ===== RESET & BASE ===== */
-* {
-  box-sizing: border-box;
+*{box-sizing:border-box}
+
+body{
+  margin:0;
+  padding:24px;
+  font-family:Inter,system-ui,sans-serif;
+  background:#020617;
+  color:#e5e7eb;
 }
 
-body {
-  margin: 0;
-  padding: 20px;
-  font-family: 'Inter', system-ui, sans-serif;
-  background: #0f172a;
-  color: #e5e7eb;
+h1{text-align:center;margin-bottom:12px}
+
+.nav{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
+
+.nav button{
+  background:#020617;
+  border:1px solid #1e293b;
+  color:#e5e7eb;
+  padding:6px 14px;
+  border-radius:8px;
 }
 
-h1 {
-  text-align: center;
-  margin-bottom: 20px;
+#summary{text-align:center;margin-bottom:10px}
+
+.calendar{
+  display:grid;
+  grid-template-columns:repeat(7,1fr);
+  gap:10px;
 }
 
-/* ===== FORM ===== */
-.form {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
-  gap: 10px;
-  background: #020617;
-  padding: 15px;
-  border-radius: 12px;
-  margin-bottom: 20px;
-  box-shadow: 0 0 15px rgba(0,0,0,.4);
+.day{
+  background:#020617;
+  border:1px solid #1e293b;
+  padding:10px;
+  border-radius:12px;
+  min-height:70px;
+  cursor:pointer;
+  transition:.2s;
 }
 
-.form input,
-.form button {
-  padding: 10px;
-  border-radius: 8px;
-  border: none;
-  outline: none;
-  font-size: 14px;
+.day:hover{transform:scale(1.05)}
+
+.day.green{color:#22c55e}
+.day.red{color:#ef4444}
+.day.gray{color:#94a3b8}
+
+.modal{
+  position:fixed;inset:0;
+  background:rgba(0,0,0,.6);
+  display:flex;align-items:center;justify-content:center
 }
 
-.form input {
-  background: #020617;
-  border: 1px solid #1e293b;
-  color: #e5e7eb;
+.hidden{display:none}
+
+.modal-box{
+  background:#020617;
+  border:1px solid #1e293b;
+  padding:20px;
+  border-radius:14px;
+  width:300px;
 }
 
-.form input::placeholder {
-  color: #64748b;
+.modal-box input{
+  width:100%;
+  padding:10px;
+  background:#020617;
+  border:1px solid #1e293b;
+  border-radius:8px;
+  color:white
 }
 
-.form button {
-  background: #22c55e;
-  color: #022c22;
-  font-weight: 600;
-  cursor: pointer;
-  transition: 0.2s;
+.modal-actions{display:flex;gap:10px;margin-top:10px}
+
+.modal-actions button{
+  flex:1;padding:10px;border-radius:8px;border:none
 }
 
-.form button:hover {
-  background: #16a34a;
-}
+#savePnl{background:#22c55e}
+#closeModal{background:#334155;color:white}
 
-/* ===== NAV ===== */
-.nav {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 10px;
-}
-
-.nav button {
-  background: #020617;
-  border: 1px solid #1e293b;
-  color: #e5e7eb;
-  padding: 6px 10px;
-  border-radius: 6px;
-  cursor: pointer;
-}
-
-/* ===== SUMMARY ===== */
-#summary {
-  margin-bottom: 10px;
-  font-weight: 600;
-}
-
-/* ===== CALENDAR ===== */
-.calendar {
-  display: grid;
-  grid-template-columns: repeat(7, 1fr);
-  gap: 6px;
-}
-
-.day {
-  background: #020617;
-  border: 1px solid #1e293b;
-  padding: 8px;
-  border-radius: 8px;
-  min-height: 60px;
-  font-size: 13px;
-}
-
-.day b {
-  display: block;
-  font-size: 14px;
-  margin-bottom: 4px;
-}
-
-.day.green { color: #22c55e; }
-.day.red   { color: #ef4444; }
-.day.gray  { color: #94a3b8; }
-
-/* ===== DETAIL (for next feature) ===== */
-#detail {
-  margin-top: 15px;
-  background: #020617;
-  border: 1px solid #1e293b;
-  border-radius: 10px;
-  padding: 10px;
+/* ===== ANDROID MODE ===== */
+@media(max-width:768px){
+  body{padding:14px}
+  h1{font-size:18px}
+  .day{min-height:50px;padding:6px;font-size:11px}
+  .modal-box{width:90%}
 }
