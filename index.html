@@ -6,10 +6,8 @@
 </head>
 <body>
   <h2>Login / Register</h2>
-
   <input id="email" placeholder="Email">
   <input id="password" type="password" placeholder="Password">
-
   <button id="loginBtn">Login</button>
   <button id="registerBtn">Register</button>
 
@@ -18,13 +16,13 @@
     import { signInWithEmailAndPassword, createUserWithEmailAndPassword } 
       from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
 
-    loginBtn.onclick = () => {
+    document.getElementById("loginBtn").onclick = () => {
       signInWithEmailAndPassword(auth, email.value, password.value)
         .then(() => location.href = "app.html")
         .catch(err => alert(err.message));
     };
 
-    registerBtn.onclick = () => {
+    document.getElementById("registerBtn").onclick = () => {
       createUserWithEmailAndPassword(auth, email.value, password.value)
         .then(() => location.href = "app.html")
         .catch(err => alert(err.message));
