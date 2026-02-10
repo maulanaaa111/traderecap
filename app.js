@@ -95,14 +95,19 @@ saveBtn.onclick = async ()=>{
 };
 
 // DELETE
-deleteBtn.onclick = async ()=>{
-  if(!selectedDocId) return;
+deleteBtn.onclick = async () => {
+  if(!selectedDocId){
+    alert("Tidak ada data yang dipilih!");
+    return;
+  }
+
   if(!confirm("Yakin mau hapus PnL tanggal ini?")) return;
 
   await deleteDoc(doc(db,"users",currentUser.uid,"pnl",selectedDocId));
   modal.classList.add("hidden");
   loadCalendar();
 };
+
 
 closeBtn.onclick = ()=> modal.classList.add("hidden");
 
