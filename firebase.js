@@ -3,15 +3,14 @@ import { getAuth } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth
 import { getFirestore } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
   const firebaseConfig = {
-    apiKey: "AIzaSyCoUbFjoRzZBxf5dTnPoKl6AhCN6nQ6cw8",
-    authDomain: "pnl-kalender-recap.firebaseapp.com",
-    databaseURL: "https://pnl-kalender-recap-default-rtdb.firebaseio.com",
-    projectId: "pnl-kalender-recap",
-    storageBucket: "pnl-kalender-recap.firebasestorage.app",
-    messagingSenderId: "9133249341",
-    appId: "1:9133249341:web:a4a214523f986ba23aeb54",
-    measurementId: "G-23CG4KD059"
-  };
+  apiKey: "AIzaSyADD7hRJUGKdkuIiLZHK96wHSmz0FDMyWI",
+  authDomain: "jurnal-data-id.firebaseapp.com",
+  projectId: "jurnal-data-id",
+  storageBucket: "jurnal-data-id.firebasestorage.app",
+  messagingSenderId: "361080177174",
+  appId: "1:361080177174:web:939ef43942706bf928ab37",
+  measurementId: "G-GWHXQEBN6R"
+};
 
 const app = initializeApp(firebaseConfig);
 export const auth = getAuth(app);
